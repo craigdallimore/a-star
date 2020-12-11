@@ -1046,6 +1046,11 @@ find-up@^3.0.0:
   dependencies:
     locate-path "^3.0.0"
 
+flow-bin@^0.139.0:
+  version "0.139.0"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.139.0.tgz#3ad6c75460be45b64f00521035c5affb3c440df5"
+  integrity sha512-eilVetLwztYtKjRj//4OsJ7aw47hsUZ8GTINxaZHWhpqiFikErQL0sV/3hQtpm54w9FuS2PO4yvbU0pWrtckqg==
+
 function-bind@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
@@ -1287,6 +1292,11 @@ prettier@^1.18.2:
   version "1.18.2"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.18.2.tgz#6823e7c5900017b4bd3acf46fe9ac4b4d7bda9ea"
   integrity sha512-OeHeMc0JhFE9idD4ZdtNibzY0+TPHSpSSb9h8FqtP+YnoZZ1sl8Vc9b1sasjfymH3SonAF4QcA2+mzHPhMvIiw==
+
+ramda@^0.27.1:
+  version "0.27.1"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.27.1.tgz#66fc2df3ef873874ffc2da6aa8984658abacf5c9"
+  integrity sha512-PgIdVpn5y5Yns8vqb8FzBUEYn98V3xcPgawAkkgj0YJ0qDsnHCiNmZYfOGMgOvoB0eWFLpYbhxUR3mxfDIMvpw==
 
 regenerate-unicode-properties@^8.2.0:
   version "8.2.0"
