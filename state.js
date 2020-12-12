@@ -5,9 +5,9 @@ import seedrandom from "seedrandom";
 
 random.use(seedrandom("dent"));
 
-const GRID = 10;
+export const GRID = 10;
 
-type Point = { x: number, y: number };
+export type Point = { x: number, y: number };
 
 type Points = Array<Point>;
 
@@ -20,9 +20,7 @@ export type State = {
 
 const nums: Array<number> = R.range(0, GRID);
 
-const points: Points = nums
-  .map((y) => nums.map((x) => ({ x: x * 2, y })))
-  .flat();
+const points: Points = nums.map((y) => nums.map((x) => ({ x, y }))).flat();
 
 // A set of ~24 integers between 0 and 100
 const randomIndexes = new Set(R.times(() => random.int(0, GRID * GRID), 24));

@@ -1,7 +1,37 @@
 // @flow
+
 import * as ansiEscapes from "ansi-escapes";
 import chalk from "chalk";
-import { rockIndexes, type State } from "./state";
+import { GRID, rockIndexes } from "./state";
+import type { State, Point } from "./state";
+
+function getGridChar({ x, y }: Point) {
+  if (x === 0 && y === 0) {
+    return "┌";
+  }
+  if (x === 0 && y === GRID - 1) {
+    return "└";
+  }
+  if (x === 0) {
+    return "├";
+  }
+  if (x === GRID - 1 && y === 0) {
+    return "┐";
+  }
+  if (x === GRID - 1 && y === GRID - 1) {
+    return "┘";
+  }
+  if (x === GRID - 1) {
+    return "┤";
+  }
+  if (y === 0) {
+    return "┬";
+  }
+  if (y === GRID - 1) {
+    return "┴";
+  }
+  return "┼";
+}
 
 function getChar(cursor, point, pointIndex) {
   const cursorAtPoint = cursor.x === point.x && cursor.y === point.y;
@@ -14,9 +44,9 @@ function getChar(cursor, point, pointIndex) {
     return chalk.green("☺");
   }
   if (rockAtPoint) {
-    return "*";
+    return "●";
   }
-  return ".";
+  return getGridChar(point);
 }
 
 export function show(state: State): void {
