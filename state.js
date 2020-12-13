@@ -11,11 +11,12 @@ export type Point = { x: number, y: number };
 
 type Points = Array<Point>;
 
-export type State = {
+export type State = {|
   points: Points,
   path: Array<number>,
+  rocks: Array<boolean>,
   index: number,
-};
+|};
 
 // Data -----------------------------------------------------------------------
 

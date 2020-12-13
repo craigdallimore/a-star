@@ -1,12 +1,4 @@
 // @flow
-
-// - [ ] Improve grid presentation
-// - [ ] find a path from top left to bottom right using a*
-// - [ ] measure performance
-
-// ----------------------------------------------------------------------------
-// https://www.npmjs.com/package/sharp
-
 import R from "ramda";
 import { initialState, type State } from "./state";
 import { show } from "./show";
