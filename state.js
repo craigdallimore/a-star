@@ -13,12 +13,15 @@ type Points = Array<Point>;
 
 export type State = {
   points: Points,
+  path: Array<number>,
   index: number,
 };
 
 // Data -----------------------------------------------------------------------
 
 const nums: Array<number> = R.range(0, GRID);
+
+const pathIndexes: Array<number> = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90];
 
 const points: Points = nums.map((y) => nums.map((x) => ({ x, y }))).flat();
 
@@ -32,6 +35,7 @@ export const rockIndexes: Array<boolean> = new Array(points.length)
 
 export const initialState: State = {
   points,
+  path: pathIndexes,
   rocks: rockIndexes,
   index: 0,
 };

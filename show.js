@@ -5,37 +5,50 @@ import chalk from "chalk";
 import { GRID, rockIndexes } from "./state";
 import type { State, Point } from "./state";
 
+// https://beautifulwebtype.com/fira-code/glyphs/?i=1383
 function getGridChar({ x, y }: Point) {
-  if (x === 0 && y === 0) {
-    return "┌";
-  }
-  if (x === 0 && y === GRID - 1) {
-    return "└";
-  }
-  if (x === 0) {
+  const isLeft = x === 0;
+  const isRight = x === GRID - 1;
+  const isTop = y === 0;
+  const isBottom = y === GRID - 1;
+
+  if (isLeft) {
+    if (isTop) {
+      return "┌";
+    }
+    if (isBottom) {
+      return "└";
+    }
     return "├";
   }
-  if (x === GRID - 1 && y === 0) {
-    return "┐";
-  }
-  if (x === GRID - 1 && y === GRID - 1) {
-    return "┘";
-  }
-  if (x === GRID - 1) {
+
+  if (isRight) {
+    if (isTop) {
+      return "┐";
+    }
+    if (isBottom) {
+      return "┘";
+    }
     return "┤";
   }
-  if (y === 0) {
+  if (isTop) {
     return "┬";
   }
-  if (y === GRID - 1) {
+  if (isBottom) {
     return "┴";
   }
   return "┼";
 }
 
-function getChar(cursor, point, pointIndex) {
+function getChar(
+  cursor: Point,
+  point: Point,
+  pointIndex: number,
+  pathIndexes: Array<number>
+) {
   const cursorAtPoint = cursor.x === point.x && cursor.y === point.y;
   const rockAtPoint = rockIndexes[pointIndex];
+  const pathAtPoint = pathIndexes.includes(pointIndex);
 
   if (cursorAtPoint && rockAtPoint) {
     return chalk.red("☺");
@@ -46,7 +59,8 @@ function getChar(cursor, point, pointIndex) {
   if (rockAtPoint) {
     return "●";
   }
-  return getGridChar(point);
+  const gridChar = getGridChar(point);
+  return pathAtPoint ? chalk.blueBright(gridChar) : gridChar;
 }
 
 export function show(state: State): void {
@@ -54,7 +68,7 @@ export function show(state: State): void {
   process.stdout.write(ansiEscapes.eraseScreen);
   state.points.forEach((p, pointIndex) => {
     try {
-      const char = getChar(c, p, pointIndex);
+      const char = getChar(c, p, pointIndex, state.path);
       process.stdout.write(ansiEscapes.cursorTo(p.x, p.y));
       process.stdout.write(char);
     } catch (e) {
