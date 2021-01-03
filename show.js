@@ -3,14 +3,14 @@
 import * as ansiEscapes from "ansi-escapes";
 import chalk from "chalk";
 import { GRID, rockIndexes } from "./state";
-import type { State, Point } from "./types";
+import type { State, Point, Board } from "./types";
 
 // https://beautifulwebtype.com/fira-code/glyphs/?i=1383
-function getGridChar({ x, y }: Point) {
+function getGridChar({ x, y }: Point, board: Board) {
   const isLeft = x === 0;
-  const isRight = x === GRID - 1;
+  const isRight = x === board[0].length - 1;
   const isTop = y === 0;
-  const isBottom = y === GRID - 1;
+  const isBottom = y === board.length - 1;
 
   if (isLeft) {
     if (isTop) {
@@ -40,6 +40,7 @@ function getGridChar({ x, y }: Point) {
   return "┼";
 }
 
+/*
 function getChar(
   cursor: Point,
   point: Point,
@@ -63,7 +64,7 @@ function getChar(
   return pathAtPoint ? chalk.blueBright(gridChar) : gridChar;
 }
 
-export function show(state: State): void {
+export function oldshow(state: State): void {
   const c = state.board[state.index];
   process.stdout.write(ansiEscapes.eraseScreen);
   state.board.forEach((p, pointIndex) => {
@@ -78,4 +79,11 @@ export function show(state: State): void {
       process.exit(1);
     }
   });
+}
+*/
+
+export function show(board: Board): string {
+  return board
+    .map(cols => cols.map(point => getGridChar(point, board)).join(""))
+    .join("\n");
 }

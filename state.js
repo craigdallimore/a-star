@@ -14,7 +14,7 @@ const nums: Array<number> = R.range(0, GRID);
 
 const pathIndexes: Array<number> = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90];
 
-const board: Board = nums.map((y) => nums.map((x) => ({ x, y }))).flat();
+const board: Board = nums.map(y => nums.map(x => ({ x, y })));
 
 // A set of ~24 integers between 0 and 100
 const randomIndexes = new Set(R.times(() => random.int(0, GRID * GRID), 24));
@@ -28,5 +28,5 @@ export const initialState: State = {
   board,
   path: pathIndexes,
   rocks: rockIndexes,
-  index: 0,
+  index: 0
 };

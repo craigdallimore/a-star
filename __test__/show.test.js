@@ -1,9 +1,31 @@
-import * as show from "../show";
+// @flow
+import { show } from "../show";
 import makeBoard from "../lib/makeBoard";
 
 test("showing a blank board", () => {
-  const board = makeBoard(3, 3);
-  expect(show(board)).toMatchInlineSnapshot("");
+  expect(`
+${show(makeBoard(3, 3))}
+`).toMatchInlineSnapshot(`
+    "
+    ┌┬┐
+    ├┼┤
+    └┴┘
+    "
+  `);
+  expect(`
+${show(makeBoard(5, 8))}
+`).toMatchInlineSnapshot(`
+    "
+    ┌┬┬┬┐
+    ├┼┼┼┤
+    ├┼┼┼┤
+    ├┼┼┼┤
+    ├┼┼┼┤
+    ├┼┼┼┤
+    ├┼┼┼┤
+    └┴┴┴┘
+    "
+  `);
 });
 
 // test("showing a board with obstacles", () => {});
