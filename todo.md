@@ -4,8 +4,8 @@ https://www.geeksforgeeks.org/a-search-algorithm/
 http://theory.stanford.edu/~amitp/GameProgramming/MovingObstacles.html#recalculating-paths
 
 - [x] get babel-jest working
-- [ ] get flow happy
-- [ ] test grid rendering
+- [x] get flow happy
+- [x] test grid rendering
 - [ ] test cursor position
 - [ ] test path rendering
 

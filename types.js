@@ -1,12 +1,15 @@
 // @flow
 
-export type Point = { x: number, y: number };
+export type Tile = "BLANK" | "START" | "GOAL" | "CURSOR" | "OBSTACLE";
+
+export type Point = {
+  x: number,
+  y: number,
+  tile: Tile
+};
 
 export type Board = Array<Array<Point>>;
 
 export type State = {|
-  board: Board,
-  path: Array<number>,
-  rocks: Array<boolean>,
-  index: number
+  board: Board
 |};
