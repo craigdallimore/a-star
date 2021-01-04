@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "app": "babel-node index",
     "test": "jest"
   },
   "babel": {
