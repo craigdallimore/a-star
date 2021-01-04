@@ -7,4 +7,12 @@ in pkgs.stdenv.mkDerivation {
       pkgs.nodejs-14_x #coc.vim
       pkgs.flow
     ];
+    shellHook = ''
+      alias gst='git status'
+      alias gd='git diff'
+      alias gc='git commit'
+      :q() {
+        exit
+      }
+    '';
   }
