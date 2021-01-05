@@ -17,7 +17,6 @@ function applyTiles(board: Board): Board {
     makePoint(0, 0, "START"),
     makePoint(9, 9, "GOAL"),
 
-    makePoint(2, 2, "OBSTACLE"),
     makePoint(2, 3, "OBSTACLE"),
     makePoint(2, 4, "OBSTACLE"),
     makePoint(2, 5, "OBSTACLE"),
@@ -25,14 +24,14 @@ function applyTiles(board: Board): Board {
     makePoint(2, 7, "OBSTACLE"),
     makePoint(2, 8, "OBSTACLE"),
     makePoint(2, 9, "OBSTACLE"),
-    makePoint(3, 2, "OBSTACLE"),
-    makePoint(3, 3, "OBSTACLE"),
-    makePoint(3, 4, "OBSTACLE"),
-    makePoint(3, 5, "OBSTACLE"),
-    makePoint(3, 6, "OBSTACLE"),
-    makePoint(3, 7, "OBSTACLE"),
-    makePoint(3, 8, "OBSTACLE"),
-    makePoint(3, 9, "OBSTACLE")
+
+    makePoint(5, 0, "OBSTACLE"),
+    makePoint(5, 1, "OBSTACLE"),
+    makePoint(5, 2, "OBSTACLE"),
+    makePoint(5, 3, "OBSTACLE"),
+    makePoint(5, 4, "OBSTACLE"),
+    makePoint(5, 5, "OBSTACLE"),
+    makePoint(5, 6, "OBSTACLE")
   ].reduce(updatePoint, board);
 }
 
