@@ -1,6 +1,7 @@
 {
   "scripts": {
     "app": "babel-node index",
+    "dev": "nodemon --exec babel-node index",
     "test": "jest"
   },
   "babel": {
@@ -17,10 +18,10 @@
     "ansi-escapes": "^4.3.1",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.3",
+    "chalk": "^4.1.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-flowtype": "^5.2.0",
     "eslint-plugin-jest": "^24.1.0",
-    "chalk": "^4.1.0",
     "flow-typed": "^2.6.2",
     "jest": "^26.6.3",
     "prettier": "^1.18.2",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "eslint": "^7.17.0",
-    "flow-bin": "0.133.0"
+    "flow-bin": "0.133.0",
+    "nodemon": "^2.0.6"
   }
 }
