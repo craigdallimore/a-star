@@ -1,21 +1,11 @@
 // @flow
 import type { Point, Board } from "./types";
-import R from "ramda";
 import { initialState } from "./lib/state";
 import { print } from "./lib/print";
 import makePoint from "./lib/makePoint";
+import { getNeighbours, setPoint } from "./lib/board";
 
 // Application ----------------------------------------------------------------
-
-function getPoint(x: number, y: number, board: Board): Point {
-  return board[y][x];
-}
-
-function updatePoint(board: Board, point: Point): Board {
-  const { x, y } = point;
-  board[y][x] = point;
-  return board;
-}
 
 function applyObstacles(board: Board): Board {
   return [
@@ -34,27 +24,7 @@ function applyObstacles(board: Board): Board {
     makePoint(4, 5, "OBSTACLE"),
     makePoint(5, 5, "OBSTACLE"),
     makePoint(6, 5, "OBSTACLE")
-  ].reduce(updatePoint, board);
-}
-
-function getNeighbours(point: Point, board: Board): Array<Point> {
-  const width = board[0].length;
-  const height = board.length;
-
-  const left = Math.max(0, point.x - 1);
-  const right = Math.min(point.x + 1, width);
-  const top = Math.max(0, point.y - 1);
-  const bottom = Math.min(point.y + 1, height);
-
-  return R.range(left, right + 1)
-    .map(x => R.range(top, bottom + 1).map(y => ({ x, y })))
-    .flat()
-    .filter(({ x, y }) => {
-      const isCurrentPoint = x === point.x && y === point.y;
-      const isObstacle = getPoint(x, y, board).tile === "OBSTACLE";
-      return !isCurrentPoint && !isObstacle;
-    })
-    .map(({ x, y }) => getPoint(x, y, board));
+  ].reduce(setPoint, board);
 }
 
 function getPath(s: Point, g: Point, board: Board): Array<Point> {
@@ -62,13 +32,13 @@ function getPath(s: Point, g: Point, board: Board): Array<Point> {
 }
 
 function applyPath(board: Board): Board {
-  const start = makePoint(0, 0, "START");
+  const start = makePoint(9, 9, "START");
   const goal = makePoint(9, 9, "GOAL");
   const path = getPath(start, goal, board);
   setTimeout(() => {
     console.log(path);
   }, 200);
-  return [...path, start, goal].reduce(updatePoint, board);
+  return [...path, start, goal].reduce(setPoint, board);
 }
 
 /*
@@ -82,6 +52,5 @@ loop(initialState);
 */
 
 print(applyPath(applyObstacles(initialState.board)));
-//applyPath(applyObstacles(initialState.board));
 
 // KAIZEN ---------------------------------------------------------------------
