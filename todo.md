@@ -3,8 +3,6 @@
 https://www.geeksforgeeks.org/a-search-algorithm/
 http://theory.stanford.edu/~amitp/GameProgramming/MovingObstacles.html#recalculating-paths
 
-- [ ] Fix rendering bug
-- [ ] Add function for getting the available neighbours of a point
 - [ ] Add function for iterating over the neighbours
 - [ ] Add function for getting the heuristic cost of a point
 

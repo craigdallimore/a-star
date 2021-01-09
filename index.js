@@ -32,7 +32,7 @@ function getPath(s: Point, g: Point, board: Board): Array<Point> {
 }
 
 function applyPath(board: Board): Board {
-  const start = makePoint(9, 9, "START");
+  const start = makePoint(0, 0, "START");
   const goal = makePoint(9, 9, "GOAL");
   const path = getPath(start, goal, board);
   setTimeout(() => {
