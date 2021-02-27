@@ -23,12 +23,12 @@ function applyObstacles(board: Board): Board {
     makePoint(3, 5, "OBSTACLE"),
     makePoint(4, 5, "OBSTACLE"),
     makePoint(5, 5, "OBSTACLE"),
-    makePoint(6, 5, "OBSTACLE")
+    makePoint(6, 5, "OBSTACLE"),
   ].reduce(setPoint, board);
 }
 
 function getPath(s: Point, g: Point, board: Board): Array<Point> {
-  return getNeighbours(s, board).map(p => ({ ...p, tile: "CURSOR" }));
+  return getNeighbours(s, board).map((p) => ({ ...p, tile: "CURSOR" }));
 }
 
 function applyPath(board: Board): Board {
