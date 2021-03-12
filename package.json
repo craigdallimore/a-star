@@ -15,6 +15,7 @@
     "@babel/node": "^7.12.6",
     "@babel/preset-env": "^7.12.7",
     "@babel/preset-flow": "^7.12.1",
+    "@decoy9697/priority-queue": "0.2.0",
     "ansi-escapes": "^4.3.1",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.3",

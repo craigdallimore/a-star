@@ -1030,6 +1030,11 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@decoy9697/priority-queue@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@decoy9697/priority-queue/-/priority-queue-0.2.0.tgz#83f6e6b15fe898b3e484f72126718d3d92fbe5ce"
+  integrity sha512-OUuteumCtI2u/L0UpqPm0NB0T5X+qIAqFqRj2OpuLJU/tyiaUvJSHxpHMVex6VLbeEZFGVPxvb3o7RagPpteyw==
+
 "@eslint/eslintrc@^0.2.2":
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-0.2.2.tgz#d01fc791e2fc33e88a29d6f3dc7e93d0cd784b76"
