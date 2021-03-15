@@ -1030,10 +1030,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@decoy9697/priority-queue@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@decoy9697/priority-queue/-/priority-queue-0.2.0.tgz#83f6e6b15fe898b3e484f72126718d3d92fbe5ce"
-  integrity sha512-OUuteumCtI2u/L0UpqPm0NB0T5X+qIAqFqRj2OpuLJU/tyiaUvJSHxpHMVex6VLbeEZFGVPxvb3o7RagPpteyw==
+"@decoy9697/priority-queue@0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@decoy9697/priority-queue/-/priority-queue-0.3.0.tgz#40234597005048aaca4022b6e22737b6753a6dba"
+  integrity sha512-Ykvo2SXytshA67Ez5mkAL/nBHt97qrp3LdnI+WJNa9d6PmIC1SopBATSy91B2Onm8ErQwKUP/vKFtjNjdvbxGg==
 
 "@eslint/eslintrc@^0.2.2":
   version "0.2.2"
@@ -2971,11 +2971,6 @@ flatted@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.1.0.tgz#a5d06b4a8b01e3a63771daa5cb7a1903e2e57067"
   integrity sha512-tW+UkmtNg/jv9CSofAKvgVcO7c2URjhTdW1ZTkcAritblu8tajiYy7YisnIflEwtKssCtOxpnBRoCB7iap0/TA==
-
-flow-bin@0.133.0:
-  version "0.133.0"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.133.0.tgz#2ee44e3f5d0c0256cfe8e99d9a85e9801c281c50"
-  integrity sha512-01T5g8GdhtJEn+lhAwuv5zkrMStrmkuHrY3Nn9/aS9y6waNmNgimMKlzRpFH66S0F6Ez9EqU9psz5QaRveSJIA==
 
 flow-typed@^2.6.2:
   version "2.6.2"
