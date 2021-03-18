@@ -35,28 +35,55 @@ function applyObstacles(board: Board): Board {
     makePoint(9, 7, "OBSTACLE"),
 
     makePoint(7, 7, "OBSTACLE"),
-    makePoint(7, 8, "OBSTACLE"),
+    //makePoint(7, 8, "OBSTACLE"),
     makePoint(7, 9, "OBSTACLE"),
   ].reduce(setPoint, board);
 }
 
 const transformPoint = (tile: Tile) => (p: Point): Point => ({ ...p, tile });
 
-function applyPath(board: Board): Board {
-  const start = makePoint(9, 0, "START");
-  const goal = makePoint(9, 9, "GOAL");
-  const { path, reachedGoal } = aStar(start, goal, board);
+function advanceState(state) {
+  const { board, path, index, goal } = state;
+  const point = path[index];
+  const reachedGoal = point.x === goal.x && point.y === goal.y;
 
-  setTimeout(() => {
-    console.log({ reachedGoal, path });
-  }, 1000);
+  if (reachedGoal) {
+    return state;
+  }
+  const cursor = transformPoint("CURSOR")(point);
 
-  return [...path.map(transformPoint("PATH")), start, goal].reduce(
-    setPoint,
-    board
-  );
+  return {
+    board: setPoint([...board], cursor),
+    path,
+    index: index + 1,
+    goal,
+  };
 }
 
-print(applyPath(applyObstacles(initialState.board)));
+function loop(state) {
+  const nextState = advanceState(state);
+  print(nextState.board);
+  setTimeout(() => {
+    loop(nextState);
+  }, 100);
+}
+
+function main() {
+  const start = makePoint(9, 0, "START");
+  const goal = makePoint(9, 9, "GOAL");
+  const board = applyObstacles(
+    [start, goal].reduce(setPoint, initialState.board)
+  );
+  const { path } = aStar(start, goal, board);
+  const state = {
+    goal,
+    board,
+    path: path.reverse(),
+    index: 0,
+  };
+  loop(state);
+}
+
+main();
 
 // KAIZEN ---------------------------------------------------------------------
