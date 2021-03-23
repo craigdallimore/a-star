@@ -5,6 +5,7 @@ import { print } from "./lib/print";
 import makePoint from "./lib/makePoint";
 import aStar from "./lib/aStar";
 import { setPoint } from "./lib/board";
+import R from "ramda";
 
 // Application ----------------------------------------------------------------
 
@@ -42,7 +43,15 @@ function applyObstacles(board: Board): Board {
 
 const transformPoint = (tile: Tile) => (p: Point): Point => ({ ...p, tile });
 
-function advanceState(state) {
+type State = {|
+  displayBoard: Board,
+  board: Board,
+  path: Array<Point>,
+  index: number,
+  goal: Point,
+|};
+
+function advanceState(state: State): State {
   const { board, path, index, goal } = state;
   const point = path[index];
   const reachedGoal = point.x === goal.x && point.y === goal.y;
@@ -53,19 +62,20 @@ function advanceState(state) {
   const cursor = transformPoint("CURSOR")(point);
 
   return {
-    board: setPoint([...board], cursor),
+    displayBoard: setPoint(R.clone(board), cursor),
+    board,
     path,
     index: index + 1,
     goal,
   };
 }
 
-function loop(state) {
+function loop(state: State): void {
   const nextState = advanceState(state);
-  print(nextState.board);
+  print(nextState.displayBoard);
   setTimeout(() => {
     loop(nextState);
-  }, 100);
+  }, 300);
 }
 
 function main() {
@@ -77,6 +87,7 @@ function main() {
   const { path } = aStar(start, goal, board);
   const state = {
     goal,
+    displayBoard: board,
     board,
     path: path.reverse(),
     index: 0,
