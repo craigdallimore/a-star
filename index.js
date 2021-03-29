@@ -4,9 +4,13 @@ import { initialState } from "./lib/state";
 import { print } from "./lib/print";
 import makePoint from "./lib/makePoint";
 import aStar from "./lib/aStar";
-import { setPoint } from "./lib/board";
+import { setPoint, getNeighbours } from "./lib/board";
+import { diagonal } from "./lib/heuristic";
 import R from "ramda";
 
+function matchLocation(p1: Point, p2: Point): boolean {
+  return p1.x === p2.x && p1.y === p2.y;
+}
 // Application ----------------------------------------------------------------
 
 function applyObstacles(board: Board): Board {
@@ -84,7 +88,22 @@ function main() {
   const board = applyObstacles(
     [start, goal].reduce(setPoint, initialState.board)
   );
-  const { path } = aStar(start, goal, board);
+  const cardinalCost = 1;
+  const diagonalCost = 1.5;
+
+  const { path, reachedGoal } = aStar({
+    start,
+    goal,
+    matchLocation,
+    heuristic: (a, b) => diagonal(a, b, cardinalCost, diagonalCost),
+    getNeighbours: (point) => getNeighbours(point, board),
+  });
+
+  if (!reachedGoal) {
+    console.log("cannot reach goal");
+    return;
+  }
+
   const state = {
     goal,
     displayBoard: board,
