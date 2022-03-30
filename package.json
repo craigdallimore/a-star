@@ -6,9 +6,9 @@
   },
   "license": "MIT",
   "description": "An a* solver",
-  "repository": "https://github.com/@decoy9697/a-star#readme",
+  "repository": "https://github.com/craigdallimore/a-star#readme",
   "bugs": {
-    "url": "https://github.com/@decoy9697/a-star/issues",
+    "url": "https://github.com/craigdallimore/a-star/issues",
     "email": "decoy9697@gmail.com"
   },
   "keywords": [
