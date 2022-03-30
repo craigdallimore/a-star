@@ -1,5 +1,3 @@
-// @flow
-
 import { getPoint, setPoint, getNeighbours, manhattan } from "../board";
 import makeBoard from "../makeBoard";
 import makePoint from "../makePoint";
@@ -37,7 +35,7 @@ describe("getNeighbours", () => {
       { x: 3, y: 4, tile: "BLANK" },
       { x: 4, y: 2, tile: "BLANK" },
       { x: 4, y: 3, tile: "BLANK" },
-      { x: 4, y: 4, tile: "BLANK" }
+      { x: 4, y: 4, tile: "BLANK" },
     ]);
   });
 
@@ -49,7 +47,7 @@ describe("getNeighbours", () => {
     expect(neighbours).toEqual([
       { x: 0, y: 1, tile: "BLANK" },
       { x: 1, y: 0, tile: "BLANK" },
-      { x: 1, y: 1, tile: "BLANK" }
+      { x: 1, y: 1, tile: "BLANK" },
     ]);
   });
   test("neighbours of a point at the bottom right", () => {
@@ -60,7 +58,7 @@ describe("getNeighbours", () => {
     expect(neighbours).toEqual([
       { x: 3, y: 3, tile: "BLANK" },
       { x: 3, y: 4, tile: "BLANK" },
-      { x: 4, y: 3, tile: "BLANK" }
+      { x: 4, y: 3, tile: "BLANK" },
     ]);
   });
   test("neighbours of a point near obstructions", () => {
@@ -80,7 +78,7 @@ describe("getNeighbours", () => {
       { x: 1, y: 1, tile: "BLANK" },
       { x: 1, y: 3, tile: "BLANK" },
       { x: 3, y: 1, tile: "BLANK" },
-      { x: 3, y: 3, tile: "BLANK" }
+      { x: 3, y: 3, tile: "BLANK" },
     ]);
   });
 });

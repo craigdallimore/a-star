@@ -1,9 +1,8 @@
-// @flow
 import type { Point, Board } from "./types";
-import { initialState } from "./lib/state";
-import { print } from "./lib/print";
-import makePoint from "./lib/makePoint";
-import { getNeighbours, setPoint } from "./lib/board";
+import { initialState } from "./state";
+import { print } from "./print";
+import makePoint from "./makePoint";
+import { getNeighbours, setPoint } from "./board";
 
 // Application ----------------------------------------------------------------
 
@@ -23,12 +22,12 @@ function applyObstacles(board: Board): Board {
     makePoint(3, 5, "OBSTACLE"),
     makePoint(4, 5, "OBSTACLE"),
     makePoint(5, 5, "OBSTACLE"),
-    makePoint(6, 5, "OBSTACLE")
+    makePoint(6, 5, "OBSTACLE"),
   ].reduce(setPoint, board);
 }
 
 function getPath(s: Point, g: Point, board: Board): Array<Point> {
-  return getNeighbours(s, board).map(p => ({ ...p, tile: "CURSOR" }));
+  return getNeighbours(s, board).map((p) => ({ ...p, tile: "CURSOR" }));
 }
 
 function applyPath(board: Board): Board {

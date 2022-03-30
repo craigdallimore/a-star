@@ -1,5 +1,3 @@
-// @flow
-
 import makePoint from "../makePoint";
 
 describe("makePoint", () => {
@@ -7,7 +5,7 @@ describe("makePoint", () => {
     expect(makePoint(1, 4, "BLANK")).toEqual({
       x: 1,
       y: 4,
-      tile: "BLANK"
+      tile: "BLANK",
     });
   });
   test("the coordinates cannot be changed", () => {

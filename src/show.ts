@@ -1,6 +1,4 @@
-// @flow
-
-import type { Point, Board } from "../types";
+import type { Point, Board } from "./types";
 
 // https://beautifulwebtype.com/fira-code/glyphs/?i=1383
 export function getGridChar({ x, y }: Point, board: Board) {
@@ -39,6 +37,6 @@ export function getGridChar({ x, y }: Point, board: Board) {
 
 export function show(board: Board): string {
   return board
-    .map(cols => cols.map(point => getGridChar(point, board)).join(""))
+    .map((cols) => cols.map((point) => getGridChar(point, board)).join(""))
     .join("\n");
 }

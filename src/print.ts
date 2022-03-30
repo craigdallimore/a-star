@@ -1,8 +1,6 @@
-// @flow
-
-import * as ansiEscapes from "ansi-escapes";
+import ansiEscapes from "ansi-escapes";
 import chalk from "chalk";
-import type { Point, Board } from "../types";
+import type { Point, Board } from "./types";
 import { getGridChar } from "./show";
 
 function getChar(point: Point, board: Board) {
@@ -23,7 +21,7 @@ function getChar(point: Point, board: Board) {
 export function print(board: Board): void {
   process.stdout.write(ansiEscapes.eraseScreen);
   board.forEach((row, index) => {
-    const rowChars = row.map(point => getChar(point, board)).join("");
+    const rowChars = row.map((point) => getChar(point, board)).join("");
     process.stdout.write(ansiEscapes.cursorTo(0, index) + rowChars);
   });
   process.stdout.write(ansiEscapes.cursorTo(0, board.length + 1));

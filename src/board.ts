@@ -1,8 +1,6 @@
-// @flow
-
 import R from "ramda";
 
-import type { Point, Board } from "../types";
+import type { Point, Board } from "./types";
 
 export function getPoint(x: number, y: number, board: Board): Point {
   return board[y][x];
@@ -24,7 +22,7 @@ export function getNeighbours(point: Point, board: Board): Array<Point> {
   const bottom = Math.min(point.y + 1, height);
 
   return R.range(left, right + 1)
-    .map(x => R.range(top, bottom + 1).map(y => ({ x, y })))
+    .map((x) => R.range(top, bottom + 1).map((y) => ({ x, y })))
     .flat()
     .filter(({ x, y }) => {
       const isCurrentPoint = x === point.x && y === point.y;

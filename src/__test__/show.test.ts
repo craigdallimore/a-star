@@ -1,4 +1,3 @@
-// @flow
 import { show } from "../show";
 import makeBoard from "../makeBoard";
 
