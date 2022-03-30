@@ -1,12 +1,12 @@
 {
-  "version": "0.2.0",
+  "version": "0.2.2",
   "scripts": {
     "prepublishOnly": "yarn run build",
     "build": "tsc"
   },
   "license": "MIT",
   "description": "An a* solver",
-  "repository": "https://github.com/craigdallimore/a-star#readme",
+  "repository": "https://github.com/craigdallimore/a-star/#readme",
   "bugs": {
     "url": "https://github.com/craigdallimore/a-star/issues",
     "email": "decoy9697@gmail.com"
