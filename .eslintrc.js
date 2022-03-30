@@ -7,14 +7,17 @@ module.exports = {
   },
   extends: [
     "eslint:recommended",
-    "plugin:flowtype/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
     "prettier",
-    "prettier/flowtype",
   ],
-  plugins: ["flowtype", "jest"],
+  plugins: ["@typescript-eslint"],
   parserOptions: {
     ecmaVersion: 12,
     sourceType: "module",
   },
-  rules: {},
+  rules: {
+    "eol-last": 2,
+  },
 };
+;

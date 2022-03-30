@@ -1,37 +1,47 @@
 {
+  "version": "0.0.1",
   "scripts": {
-    "app": "babel-node index",
-    "dev": "nodemon --exec babel-node index",
+    "app": "ts-node src/main",
+    "dev": "nodemon --exec ts-node src/main",
     "test": "jest"
   },
-  "babel": {
-    "presets": [
-      "@babel/preset-flow",
-      "@babel/preset-env"
-    ]
+  "license": "MIT",
+  "description": "An a* solver",
+  "repository": "https://github.com/@decoy9697/a-star#readme",
+  "bugs": {
+    "url": "https://github.com/@decoy9697/a-star/issues",
+    "email": "decoy9697@gmail.com"
   },
+  "keywords": [
+    "a-star",
+    "path",
+    "pathfinding",
+    "algorithm"
+  ],
+  "files": [
+    "dist"
+  ],
+  "name": "@decoy9697/a-star",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "dependencies": {
-    "@babel/core": "^7.12.9",
-    "@babel/node": "^7.12.6",
-    "@babel/preset-env": "^7.12.7",
-    "@babel/preset-flow": "^7.12.1",
-    "ansi-escapes": "^4.3.1",
-    "babel-eslint": "^10.1.0",
-    "babel-jest": "^26.6.3",
-    "chalk": "^4.1.0",
-    "eslint-config-prettier": "^6.15.0",
-    "eslint-plugin-flowtype": "^5.2.0",
-    "eslint-plugin-jest": "^24.1.0",
-    "flow-typed": "^2.6.2",
-    "jest": "^26.6.3",
-    "prettier": "^1.18.2",
-    "ramda": "^0.27.1",
-    "random": "^2.2.0",
+    "ansi-escapes": "^5.0.0",
+    "chalk": "^5.0.1",
+    "prettier": "^2.6.1",
+    "ramda": "^0.28.0",
+    "random": "^3.0.6",
     "seedrandom": "^3.0.5"
   },
   "devDependencies": {
-    "eslint": "^7.17.0",
-    "flow-bin": "0.133.0",
-    "nodemon": "^2.0.6"
+    "@types/jest": "^27.4.1",
+    "@types/node": "^17.0.23",
+    "eslint": "^8.12.0",
+    "eslint-config-prettier": "^8.5.0",
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "ts-jest": "^27.1.4",
+    "ts-node": "^10.7.0",
+    "tslib": "^2.3.1",
+    "typescript": "^4.6.3"
   }
 }
