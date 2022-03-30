@@ -3,12 +3,11 @@
 [![Downloads][downloads-badge]][downloads]
 [![Size][size-badge]][size]
 
-```
+```shell
 npm install @decoy9697/a-star
 ```
 
-The library presumes you have some kind of linked structure
-with a _start_ `Node` and an end `Node`. The `Node` structure can be whatever you like.
+The library presumes you have some kind of linked structure with a _start_ `Node` and a _goal_ `Node`. The `Node` structure can be whatever you like.
 
 ## Options
 
@@ -31,7 +30,7 @@ You will need to provide an options object to the `aStar` function, with the fol
 
 ## Example
 
-```
+```js
 import aStar from "@decoy9697/a-star";
 
 const result = aStar({
@@ -41,6 +40,12 @@ const result = aStar({
   eqNode: (nodeA, nodeB) => { ... },
   heuristic: (nodeA, nodeB ) => { ... }
 });
+
+if (result.reachedGoal) {
+  console.log('Path': result.path);
+  } else {
+  console.log('Did not reach goal');
+}
 ```
 
 <!-- Definitions -->
