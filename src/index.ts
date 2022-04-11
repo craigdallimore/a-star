@@ -1,11 +1,11 @@
-import PQ, { LOW_FIRST } from "@decoy9697/priority-queue";
+import PQ, {LOW_FIRST} from '@decoy9697/priority-queue';
 
 function reconstructPath<Node>(options: {
   eqNode: (a: Node, b: Node) => boolean;
   cameFrom: Map<Node, Node | undefined>;
   start: Node;
   goal: Node;
-}): { path: Node[]; reachedGoal: boolean } {
+}): {path: Node[]; reachedGoal: boolean} {
   const path = [];
   let current = options.goal;
   let reachedStart = options.eqNode(current, options.start);
@@ -20,7 +20,7 @@ function reconstructPath<Node>(options: {
     }
   }
 
-  return { path, reachedGoal: reachedStart };
+  return {path, reachedGoal: reachedStart};
 }
 
 export default function aStar<Node>(options: {
@@ -29,8 +29,8 @@ export default function aStar<Node>(options: {
   getNeighbours: (a: Node) => Node[];
   eqNode: (a: Node, b: Node) => boolean;
   heuristic: (a: Node, b: Node) => number;
-}): { path: Node[]; reachedGoal: boolean } {
-  const { start, goal, getNeighbours, heuristic, eqNode } = options;
+}): {path: Node[]; reachedGoal: boolean} {
+  const {start, goal, getNeighbours, heuristic, eqNode} = options;
 
   const cameFrom = new Map<Node, Node | undefined>();
   const costSoFar = new Map<Node, number>();
@@ -38,7 +38,7 @@ export default function aStar<Node>(options: {
   cameFrom.set(start, undefined);
   costSoFar.set(start, 0);
 
-  const frontier = new PQ<Node>({ sort: LOW_FIRST });
+  const frontier = new PQ<Node>({sort: LOW_FIRST});
 
   frontier.insert(start, 0);
 
@@ -68,5 +68,5 @@ export default function aStar<Node>(options: {
     }
   }
 
-  return reconstructPath<Node>({ eqNode, cameFrom, start, goal });
+  return reconstructPath<Node>({eqNode, cameFrom, start, goal});
 }
