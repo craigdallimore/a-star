@@ -1,12 +1,13 @@
 {
-  "version": "0.2.2",
+  "version": "0.2.4",
   "scripts": {
-    "prepublishOnly": "yarn run build",
+    "format": "xo --fix",
+    "prepublishOnly": "xo && yarn run build",
     "build": "tsc"
   },
   "license": "MIT",
   "description": "An a* solver",
-  "repository": "https://github.com/craigdallimore/a-star/#readme",
+  "repository": "https://github.com/craigdallimore/a-star",
   "bugs": {
     "url": "https://github.com/craigdallimore/a-star/issues",
     "email": "decoy9697@gmail.com"
@@ -23,15 +24,21 @@
   "name": "@decoy9697/a-star",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "xo": {
+    "prettier": true
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "useTabs": false
+  },
   "dependencies": {
     "@decoy9697/priority-queue": "^1.0.1"
   },
   "devDependencies": {
     "@types/node": "^17.0.23",
-    "eslint": "^8.12.0",
-    "eslint-config-prettier": "^8.5.0",
     "prettier": "^2.6.1",
     "tslib": "^2.3.1",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.3",
+    "xo": "^0.48.0"
   }
 }

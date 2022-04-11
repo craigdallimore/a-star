@@ -1,40 +1,41 @@
 import PQ, { LOW_FIRST } from "@decoy9697/priority-queue";
 
-function reconstructPath<Node>(opts: {
+function reconstructPath<Node>(options: {
   eqNode: (a: Node, b: Node) => boolean;
-  cameFrom: Map<Node, Node | null>;
+  cameFrom: Map<Node, Node | undefined>;
   start: Node;
   goal: Node;
-}): { path: Array<Node>; reachedGoal: boolean } {
+}): { path: Node[]; reachedGoal: boolean } {
   const path = [];
-  let current = opts.goal;
-  let reachedStart = opts.eqNode(current, opts.start);
+  let current = options.goal;
+  let reachedStart = options.eqNode(current, options.start);
   while (!reachedStart) {
     path.push(current);
-    const next = opts.cameFrom.get(current);
+    const next = options.cameFrom.get(current);
     if (next) {
       current = next;
     } else {
-      reachedStart = opts.eqNode(current, opts.start);
+      reachedStart = options.eqNode(current, options.start);
       break;
     }
   }
+
   return { path, reachedGoal: reachedStart };
 }
 
-export default function aStar<Node>(opts: {
+export default function aStar<Node>(options: {
   start: Node;
   goal: Node;
-  getNeighbours: (a: Node) => Array<Node>;
+  getNeighbours: (a: Node) => Node[];
   eqNode: (a: Node, b: Node) => boolean;
   heuristic: (a: Node, b: Node) => number;
-}): { path: Array<Node>; reachedGoal: boolean } {
-  const { start, goal, getNeighbours, heuristic, eqNode } = opts;
+}): { path: Node[]; reachedGoal: boolean } {
+  const { start, goal, getNeighbours, heuristic, eqNode } = options;
 
-  const cameFrom = new Map<Node, Node | null>();
+  const cameFrom = new Map<Node, Node | undefined>();
   const costSoFar = new Map<Node, number>();
 
-  cameFrom.set(start, null);
+  cameFrom.set(start, undefined);
   costSoFar.set(start, 0);
 
   const frontier = new PQ<Node>({ sort: LOW_FIRST });
@@ -52,9 +53,9 @@ export default function aStar<Node>(opts: {
     }
 
     const neighbours = getNeighbours(current);
-    for (let neighbour of neighbours) {
-      const currentCost = costSoFar.get(current) || 0;
-      const neighbourCost = costSoFar.get(neighbour) || 0;
+    for (const neighbour of neighbours) {
+      const currentCost = costSoFar.get(current) ?? 0;
+      const neighbourCost = costSoFar.get(neighbour) ?? 0;
       const newCost = currentCost + heuristic(current, neighbour);
       const hasVisitedNeighbour = costSoFar.has(neighbour);
       const isCheaper = newCost < neighbourCost;
