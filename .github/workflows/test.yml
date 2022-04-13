@@ -1,0 +1,26 @@
+name: test
+on:
+  - push
+jobs:
+  test:
+    name: ${{matrix.node}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install
+        uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: install # yarn install
+      - name: Run tests
+        uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: test # yarn test
+      - name: CodeCov
+        uses: codecov/codecov-action@v2
+    strategy:
+      matrix:
+        node:
+          - lts/erbium
+          - node
+

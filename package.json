@@ -3,7 +3,7 @@
   "scripts": {
     "format": "xo --fix",
     "test": "jest src && yarn format && yarn run test-coverage",
-    "test-coverage": "c8 --check-coverage --branches 100 --functions 100 --lines 100 --statements 100 --reporter lcov jest src",
+    "test-coverage": "jest src --coverage",
     "prepublishOnly": "yarn test && tsc",
     "build": "tsc"
   },
@@ -29,6 +29,7 @@
   "xo": {
     "prettier": true,
     "rules": {
+      "func-names": "off",
       "import/extensions": "off",
       "unicorn/prefer-module": "off"
     }
@@ -44,7 +45,6 @@
   "devDependencies": {
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.23",
-    "c8": "^7.11.0",
     "jest": "^27.5.1",
     "prettier": "^2.6.1",
     "ts-jest": "^27.1.4",
