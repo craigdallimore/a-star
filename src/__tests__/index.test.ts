@@ -1,5 +1,6 @@
-import * as fc from "fast-check";
-import aStar from "../index";
+import {describe, test, expect, it} from 'vitest';
+import * as fc from 'fast-check';
+import aStar from '../index.js';
 
 // This a-star implementation does not have baked-in assumptions about the
 // structure of the data, so a `getNeighbours` function needs to be supplied
@@ -10,8 +11,8 @@ import aStar from "../index";
 type Grid = Array<Array<[number, number]>>;
 
 function makeGrid(cols: number, rows: number): Grid {
-  return Array.from({ length: cols }).map((_, colIndex) =>
-    Array.from({ length: rows }).map((_, rowIndex) => [colIndex, rowIndex])
+  return Array.from({length: cols}).map((_, colIndex) =>
+    Array.from({length: rows}).map((_, rowIndex) => [colIndex, rowIndex]),
   );
 }
 
@@ -66,7 +67,7 @@ function makeGetNeighbours(cols: Grid) {
 
 // Check that the getNeighbours test function works as expected
 
-describe("getNeighbours", () => {
+describe('getNeighbours', () => {
   const grid = makeGrid(5, 5);
   const getNeighbours = makeGetNeighbours(grid);
 
@@ -83,11 +84,11 @@ describe("getNeighbours", () => {
   // ┗━━━┻━━━┻━━━┻━━━┻━━━┛
 
   const arbitraryPoint = fc.tuple(
-    fc.integer({ min: 0, max: 4 }),
-    fc.integer({ min: 0, max: 4 })
+    fc.integer({min: 0, max: 4}),
+    fc.integer({min: 0, max: 4}),
   );
 
-  it("only finds neighbours that exist on the grid", () => {
+  it('only finds neighbours that exist on the grid', () => {
     fc.assert(
       fc.property(arbitraryPoint, (point) => {
         const neighbours = getNeighbours(point);
@@ -95,11 +96,11 @@ describe("getNeighbours", () => {
         return neighbours.every(([col, row]) => {
           return col >= 0 && col <= 4 && row >= 0 && row <= 4;
         });
-      })
+      }),
     );
   });
 
-  it("does not include the point among the neighbours", () => {
+  it('does not include the point among the neighbours', () => {
     fc.assert(
       fc.property(arbitraryPoint, (point) => {
         const neighbours = getNeighbours(point);
@@ -107,11 +108,11 @@ describe("getNeighbours", () => {
         return neighbours.every(([col, row]) => {
           return !(col === point[0] && row === point[1]);
         });
-      })
+      }),
     );
   });
 
-  it("always produces 3, 5 or 8 neighbours", () => {
+  it('always produces 3, 5 or 8 neighbours', () => {
     fc.assert(
       fc.property(arbitraryPoint, (point) => {
         const neighbours = getNeighbours(point);
@@ -121,11 +122,11 @@ describe("getNeighbours", () => {
           neighbours.length === 5 ||
           neighbours.length === 8
         );
-      })
+      }),
     );
   });
 
-  test("no neighbour is more than one row or col away", () => {
+  test('no neighbour is more than one row or col away', () => {
     fc.assert(
       fc.property(arbitraryPoint, (point) => {
         const neighbours = getNeighbours(point);
@@ -136,21 +137,21 @@ describe("getNeighbours", () => {
 
           return c > -2 && c < 2 && r > -2 && r < 2;
         });
-      })
+      }),
     );
   });
 });
 
-describe("a-star", () => {
+describe('a-star', () => {
   function eqNode(a: [number, number], b: [number, number]): boolean {
     return a[0] === b[0] && a[1] === b[1];
   }
 
   function heuristic(a: [number, number], b: [number, number]): number {
-    return Math.sqrt((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2);
+    return Math.hypot(a[0] - b[0], a[1] - b[1]);
   }
 
-  test("the start is the goal", () => {
+  test('the start is the goal', () => {
     // ┏━━━┓
     // ┃0,0┃
     // ┗━━━┛
@@ -174,7 +175,7 @@ describe("a-star", () => {
     });
   });
 
-  test("straight path", () => {
+  test('straight path', () => {
     // ┏━━━┓
     // ┃0,0┃
     // ┣━━━┫
@@ -212,7 +213,7 @@ describe("a-star", () => {
     });
   });
 
-  test("optimal path", () => {
+  test('optimal path', () => {
     // ┏━━━┳━━━┳━━━┳━━━┳━━━┓
     // ┃0,0┃1,0┃2,0┃3,0┃4,0┃
     // ┣━━━╋━━━╋━━━╋━━━╋━━━┫
