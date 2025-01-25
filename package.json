@@ -2,9 +2,9 @@
   "version": "0.2.5",
   "scripts": {
     "format": "xo --fix",
-    "test": "jest src && yarn format && yarn run test-coverage",
+    "test": "jest src && npm run format && npm run test-coverage",
     "test-coverage": "jest src --coverage",
-    "prepublishOnly": "yarn test && tsc",
+    "prepublishOnly": "npm test && tsc",
     "build": "tsc"
   },
   "license": "MIT",
