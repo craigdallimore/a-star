@@ -1,18 +1,23 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "moduleResolution": "node",
-    "target": "es2016",
-    "lib": ["es6", "dom"],
-    "module": "commonjs",
-    "rootDir": "src",
-    "baseUrl": "src",
-    "noImplicitAny": true,
-    "outDir": "dist",
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "target": "es2022",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "lib": ["es2022"],
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
     "strict": true,
-    "skipLibCheck": true
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "module": "NodeNext",
+    "outDir": "dist",
+    "rootDir": "src",
+    "sourceMap": true,
+    "declaration": true
   },
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "benchmark.ts"]
 }
