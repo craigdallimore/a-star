@@ -1,5 +1,7 @@
 import PQ, {LOW_FIRST} from '@decoy9697/priority-queue';
 
+const finalId = crypto.randomUUID();
+
 function reconstructPath<Node>(options: {
   eqNode: (a: Node, b: Node) => boolean;
   cameFrom: Map<string, Node | undefined>;
@@ -8,16 +10,20 @@ function reconstructPath<Node>(options: {
   goal: Node;
 }): {path: Node[]; reachedGoal: boolean} {
   const path = [];
-  let current = options.goal;
-  let reachedStart = options.eqNode(current, options.start);
-  while (!reachedStart) {
-    path.push(current);
-    const next = options.cameFrom.get(options.getId(current));
-    if (next) {
-      current = next;
-    } else {
-      reachedStart = options.eqNode(current, options.start);
-      break;
+  let current = options.cameFrom.get(finalId);
+  let reachedStart = false;
+
+  if (current) {
+    reachedStart = options.eqNode(current, options.start);
+    while (!reachedStart) {
+      path.push(current);
+      const next = options.cameFrom.get(options.getId(current));
+      if (next) {
+        current = next;
+      } else {
+        reachedStart = options.eqNode(current, options.start);
+        break;
+      }
     }
   }
 
@@ -37,9 +43,9 @@ export default function aStar<Node>(options: {
   const cameFrom = new Map<string, Node | undefined>();
   const costSoFar = new Map<string, number>();
 
-  const startKey = getId(start);
-  cameFrom.set(startKey, undefined);
-  costSoFar.set(startKey, 0);
+  const startId = getId(start);
+  cameFrom.set(startId, undefined);
+  costSoFar.set(startId, 0);
 
   const frontier = new PQ<Node>({sort: LOW_FIRST});
 
@@ -52,25 +58,27 @@ export default function aStar<Node>(options: {
     }
 
     if (eqNode(current, goal)) {
+      cameFrom.set(finalId, current);
       break;
     }
 
-    const currentKey = getId(current);
+    const currentId = getId(current);
 
     const neighbours = getNeighbours(current);
     for (const neighbour of neighbours) {
-      const neighbourKey = getId(neighbour);
+      const neighbourId = getId(neighbour);
 
-      const currentCost = costSoFar.get(currentKey) ?? 0;
-      const neighbourCost = costSoFar.get(neighbourKey) ?? 0;
+      const currentCost = costSoFar.get(currentId) ?? 0;
+      const neighbourCost = costSoFar.get(neighbourId) ?? 0;
       const newCost = currentCost + heuristic(current, neighbour);
-      const hasVisitedNeighbour = costSoFar.has(neighbourKey);
+      const hasVisitedNeighbour = costSoFar.has(neighbourId);
       const isCheaper = newCost < neighbourCost;
       if (!hasVisitedNeighbour || isCheaper) {
-        costSoFar.set(neighbourKey, newCost);
+        costSoFar.set(neighbourId, newCost);
         const priority = newCost + heuristic(neighbour, goal);
+
         frontier.insert(neighbour, priority);
-        cameFrom.set(neighbourKey, current);
+        cameFrom.set(neighbourId, current);
       }
     }
   }
