@@ -32,6 +32,7 @@
     "prettier": true,
     "rules": {
       "func-names": "off",
+      "@typescript-eslint/non-nullable-type-assertion-style": "off",
       "import/extensions": "off",
       "unicorn/prefer-module": "off"
     }
