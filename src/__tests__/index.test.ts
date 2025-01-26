@@ -41,7 +41,7 @@ function makeGetNeighbours(cols: Grid) {
     }
 
     if (hasRowAbove) {
-    neighbours.push(previousCol[row - 1] as [number,number]);
+    neighbours.push(currentCol[row - 1] as [number,number]);
     }
 
     if (hasRowAbove && hasColToRight) {
