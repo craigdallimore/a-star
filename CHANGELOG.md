@@ -1,5 +1,11 @@
 # @decoy9697/a-star
 
+## 2.0.0
+
+### Major Changes
+
+- 93e51c9: Adds a new required method to the API. You will need to implement `getId`.
+
 ## 1.1.0
 
 ### Minor Changes
