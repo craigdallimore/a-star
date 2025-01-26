@@ -52,7 +52,7 @@ if (result.reachedGoal) {
 
 <!-- Definitions -->
 
-[build-badge]: https://github.com/craigdallimore/a-star/workflows/test/badge.svg
+[build-badge]: https://github.com/craigdallimore/a-star/workflows/CI/badge.svg
 [build]: https://github.com/craigdallimore/a-star/actions
 [coverage-badge]: https://img.shields.io/codecov/c/github/craigdallimore/a-star.svg
 [coverage]: https://codecov.io/github/craigdallimore/a-star
