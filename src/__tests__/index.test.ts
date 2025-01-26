@@ -16,6 +16,10 @@ function makeGrid(cols: number, rows: number): Grid {
   );
 }
 
+function getId(node: [number, number]): string {
+  return `[${node[0]},${node[1]}]`;
+}
+
 function makeGetNeighbours(cols: Grid) {
   return function getNeighbours(p: [number, number]): Array<[number, number]> {
     const [col, row] = p;
@@ -169,6 +173,7 @@ describe('a-star', () => {
     const result = aStar({
       start,
       goal,
+      getId,
       heuristic,
       getNeighbours,
       eqNode,
@@ -201,6 +206,7 @@ describe('a-star', () => {
     const result = aStar({
       start,
       goal,
+      getId,
       heuristic,
       getNeighbours,
       eqNode,
@@ -239,6 +245,7 @@ describe('a-star', () => {
     const result = aStar({
       start,
       goal,
+      getId,
       heuristic,
       getNeighbours,
       eqNode,

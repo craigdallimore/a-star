@@ -15,13 +15,14 @@ The library presumes you have some kind of linked structure with a _start_ `Node
 
 You will need to provide an options object to the `aStar` function, with the following keys:
 
-| Key             | Type                      | Description                                                                                                                                                                            |
-| --------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `start`         | `Node`                    | The starting node                                                                                                                                                                      |
-| `goal`          | `Node`                    | The goal node. The algorithm will _attempt_ to make an array of nodes from the `start` to the `goal`.                                                                                  |
-| `getNeighbours` | `Node => Array<Node>`     | A function that finds the directly connected nodes for a given node. _NOTE_. The returned nodes will be used as `Map` keys, so these ought to be references to the nodes in the graph. |
-| `eqNode`        | `(Node, Node) => boolean` | A function for comparing two nodes (`true` if they are the same)                                                                                                                       |
-| `heuristic`     | `(Node, Node) => number`  | A function that determines the _cost_ of travelling from one node to the other.                                                                                                        |
+  | Key             | Type                      | Description                                                                                                                                                                            |
+  | --------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  | `start`         | `Node`                    | The starting node                                                                                                                                                                      |
+  | `goal`          | `Node`                    | The goal node. The algorithm will _attempt_ to make an array of nodes from the `start` to the `goal`.                                                                                  |
+  | `getId`         | `Node => string`          | A function for that identifies a node using a string                                                                                                                                   |
+  | `getNeighbours` | `Node => Array<Node>`     | A function that finds the directly connected nodes for a given node. _NOTE_. The returned nodes will be used as `Map` keys, so these ought to be references to the nodes in the graph. |
+  | `eqNode`        | `(Node, Node) => boolean` | A function for comparing two nodes (`true` if they are the same)                                                                                                                       |
+  | `heuristic`     | `(Node, Node) => number`  | A function that determines the _cost_ of travelling from one node to the other.                                                                                                        |
 
 ## Return type
 
@@ -38,6 +39,7 @@ import aStar from "@decoy9697/a-star";
 const result = aStar({
   start: node0,
   goal: node43,
+  getId: (node) => node.id,
   getNeighbours: (node) => { ... },
   eqNode: (nodeA, nodeB) => { ... },
   heuristic: (nodeA, nodeB ) => { ... }
