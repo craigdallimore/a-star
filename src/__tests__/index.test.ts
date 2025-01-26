@@ -2,6 +2,8 @@ import {describe, test, expect, it} from 'vitest';
 import * as fc from 'fast-check';
 import aStar from '../index.js';
 
+
+
 // This a-star implementation does not have baked-in assumptions about the
 // structure of the data, so a `getNeighbours` function needs to be supplied
 // that will work with the data structure.
@@ -20,8 +22,13 @@ function makeGetNeighbours(cols: Grid) {
   return function getNeighbours(p: [number, number]): Array<[number, number]> {
     const [col, row] = p;
 
+    const firstCol = cols[0] as [number, number][];
+    const currentCol = cols[col] as [number, number][];
+    const previousCol = cols[col - 1] as [number, number][];
+    const nextCol = cols[col + 1] as [number, number][];
+
     const lastColIndex = cols.length - 1;
-    const lastRowIndex = cols[0].length - 1;
+    const lastRowIndex = firstCol.length - 1;
     const hasColToLeft = col > 0;
     const hasColToRight = col < lastColIndex;
     const hasRowAbove = row > 0;
@@ -30,35 +37,35 @@ function makeGetNeighbours(cols: Grid) {
     const neighbours: Array<[number, number]> = [];
 
     if (hasRowAbove && hasColToLeft) {
-      neighbours.push(cols[col - 1][row - 1]);
+      neighbours.push(previousCol[row - 1] as [number, number]);
     }
 
     if (hasRowAbove) {
-      neighbours.push(cols[col][row - 1]);
+    neighbours.push(previousCol[row - 1] as [number,number]);
     }
 
     if (hasRowAbove && hasColToRight) {
-      neighbours.push(cols[col + 1][row - 1]);
+      neighbours.push(nextCol[row - 1] as [number,number]);
     }
 
     if (hasColToLeft) {
-      neighbours.push(cols[col - 1][row]);
+      neighbours.push(previousCol[row] as [number,number]);
     }
 
     if (hasColToRight) {
-      neighbours.push(cols[col + 1][row]);
+      neighbours.push(nextCol[row] as [number,number]);
     }
 
     if (hasRowBelow && hasColToLeft) {
-      neighbours.push(cols[col - 1][row + 1]);
+      neighbours.push(previousCol[row + 1] as [number,number]);
     }
 
     if (hasRowBelow) {
-      neighbours.push(cols[col][row + 1]);
+      neighbours.push(currentCol[row + 1] as [number, number]);
     }
 
     if (hasRowBelow && hasColToRight) {
-      neighbours.push(cols[col + 1][row + 1]);
+      neighbours.push(nextCol[row + 1] as [number,number]);
     }
 
     return neighbours;
@@ -158,8 +165,8 @@ describe('a-star', () => {
 
     const grid = makeGrid(1, 1);
     const getNeighbours = makeGetNeighbours(grid);
-    const start = grid[0][0];
-    const goal = grid[0][0];
+    const start = grid[0]?.[0] as [number, number];
+    const goal = grid[0]?.[0] as [number, number];
 
     const result = aStar({
       start,
@@ -190,8 +197,8 @@ describe('a-star', () => {
 
     const grid = makeGrid(1, 5);
     const getNeighbours = makeGetNeighbours(grid);
-    const start = grid[0][0];
-    const goal = grid[0][4];
+    const start = grid[0]?.[0]as [number, number];
+    const goal = grid[0]?.[4] as [number, number];
 
     const result = aStar({
       start,
@@ -228,8 +235,8 @@ describe('a-star', () => {
 
     const grid = makeGrid(5, 5);
     const getNeighbours = makeGetNeighbours(grid);
-    const start = grid[0][0];
-    const goal = grid[4][4];
+    const start = grid[0]?.[0] as [number, number];
+    const goal = grid[4]?.[4] as [number, number];
 
     const result = aStar({
       start,
