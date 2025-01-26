@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0",
+  "version": "2.0.1",
   "scripts": {
     "ci": "npm run build && npm run test && npm run check-exports",
     "format": "xo --fix",

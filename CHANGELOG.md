@@ -1,5 +1,11 @@
 # @decoy9697/a-star
 
+## 2.0.1
+
+### Patch Changes
+
+- f152dd0: Fixes an issue where the goal node is used instead of a neighbour, which can break paths that rely on generated spaces (such as GOAP).
+
 ## 2.0.0
 
 ### Major Changes
