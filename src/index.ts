@@ -2,7 +2,7 @@ import PQ, {LOW_FIRST} from '@decoy9697/priority-queue';
 
 function reconstructPath<Node>(options: {
   eqNode: (a: Node, b: Node) => boolean;
-  cameFrom: Map<Node, Node | undefined>;
+  cameFrom: Map<string, Node | undefined>;
   start: Node;
   goal: Node;
 }): {path: Node[]; reachedGoal: boolean} {
@@ -11,7 +11,7 @@ function reconstructPath<Node>(options: {
   let reachedStart = options.eqNode(current, options.start);
   while (!reachedStart) {
     path.push(current);
-    const next = options.cameFrom.get(current);
+    const next = options.cameFrom.get(JSON.stringify(current));
     if (next) {
       current = next;
     } else {
@@ -32,11 +32,12 @@ export default function aStar<Node>(options: {
 }): {path: Node[]; reachedGoal: boolean} {
   const {start, goal, getNeighbours, heuristic, eqNode} = options;
 
-  const cameFrom = new Map<Node, Node | undefined>();
-  const costSoFar = new Map<Node, number>();
+  const cameFrom = new Map<string, Node | undefined>();
+  const costSoFar = new Map<string, number>();
 
-  cameFrom.set(start, undefined);
-  costSoFar.set(start, 0);
+  const startKey = JSON.stringify(start);
+  cameFrom.set(startKey, undefined);
+  costSoFar.set(startKey, 0);
 
   const frontier = new PQ<Node>({sort: LOW_FIRST});
 
@@ -52,18 +53,22 @@ export default function aStar<Node>(options: {
       break;
     }
 
+    const currentKey = JSON.stringify(current);
+
     const neighbours = getNeighbours(current);
     for (const neighbour of neighbours) {
-      const currentCost = costSoFar.get(current) ?? 0;
-      const neighbourCost = costSoFar.get(neighbour) ?? 0;
+      const neighbourKey = JSON.stringify(neighbour);
+
+      const currentCost = costSoFar.get(currentKey) ?? 0;
+      const neighbourCost = costSoFar.get(neighbourKey) ?? 0;
       const newCost = currentCost + heuristic(current, neighbour);
-      const hasVisitedNeighbour = costSoFar.has(neighbour);
+      const hasVisitedNeighbour = costSoFar.has(neighbourKey);
       const isCheaper = newCost < neighbourCost;
       if (!hasVisitedNeighbour || isCheaper) {
-        costSoFar.set(neighbour, newCost);
+        costSoFar.set(neighbourKey, newCost);
         const priority = newCost + heuristic(neighbour, goal);
         frontier.insert(neighbour, priority);
-        cameFrom.set(neighbour, current);
+        cameFrom.set(neighbourKey, current);
       }
     }
   }
